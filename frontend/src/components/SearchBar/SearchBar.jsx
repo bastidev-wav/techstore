@@ -1,33 +1,23 @@
-import { useState } from 'react';
 import { Search } from 'lucide-react';
-import './SearchBar.css'
+import './SearchBar.css';
 
-const SearchBar = ({ setSearchQuery }) => {
-    const [query, setQuery] = useState('');
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-        setSearchQuery(query);
-    };
-
+const SearchBar = ({ searchQuery, setSearchQuery }) => {
     const handleChange = (e) => {
-        setQuery(e.target.value);
-        if (e.target.value === '') {
-            setSearchQuery('');
-        }
-    };
+        setSearchQuery(e.target.value);
+    }
 
     return (
-        <form className="search-container" onSubmit={handleSearch}>
-            <input
-                type="text"
-                className="search-input"
-                placeholder="Buscar productos..."
-                value={query}
-                onChange={handleChange}
+        <form className='search-container' onSubmit={(e) => e.preventDefault()}>
+            <input 
+            type="text"
+            className='search-input'
+            placeholder='Buscar producto...'
+            value={searchQuery}
+            onChange={handleChange}
+
             />
 
-            <button type="submit" className="search-btn">
+            <button type='button' className='search-btn'>
                 <Search size={20} />
             </button>
         </form>
