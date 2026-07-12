@@ -1,0 +1,12 @@
+{
+  "name": "TechStore",
+  "short_name": "TechStore",
+  "description": "Tienda online de tecnología, hardware, periféricos y accesorios.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "lang": "es-CL"
+}

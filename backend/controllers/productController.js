@@ -1,7 +1,5 @@
 const Product = require('../models/Product');
 
-// @desc    Obtener todos los productos
-// @route   GET /api/products
 const getProducts = async (req, res) => {
     try {
         const products = await Product.find({});
@@ -11,19 +9,15 @@ const getProducts = async (req, res) => {
     }
 };
 
-// @desc    Crear un producto
-// @route   POST /api/products
 const createProduct = async (req, res) => {
     try {
         const { nombre, precio, categoria, descripcion, stock, rating } = req.body;
         
-        // Asignamos la ruta de la imagen. Si Multer subió una, usamos esa.
-        // Como se guarda en public/imagen/, la ruta para React es simplemente /imagen/nombre_archivo.jpg
         let imagenUrl = 'https://via.placeholder.com/300';
         if (req.file) {
             imagenUrl = `/imagen/${req.file.filename}`;
         } else if (req.body.imagen) {
-            imagenUrl = req.body.imagen; // Por si viene del seeder
+            imagenUrl = req.body.imagen;
         }
 
         const product = new Product({
@@ -42,8 +36,6 @@ const createProduct = async (req, res) => {
     }
 };
 
-// @desc    Actualizar un producto
-// @route   PUT /api/products/:id
 const updateProduct = async (req, res) => {
     try {
         const { nombre, precio, categoria, descripcion, stock, rating } = req.body;
@@ -71,8 +63,6 @@ const updateProduct = async (req, res) => {
     }
 };
 
-// @desc    Eliminar un producto
-// @route   DELETE /api/products/:id
 const deleteProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);

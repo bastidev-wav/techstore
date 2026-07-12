@@ -133,7 +133,7 @@ techstore/
 ## 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/bastidev-wav/techstore
+git clone https://github.com/bastidev-wav/techstore.git
 ```
 
 Entrar al proyecto
