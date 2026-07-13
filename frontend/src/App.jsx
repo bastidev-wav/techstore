@@ -12,6 +12,7 @@ import Admin from './pages/Admin';
 export default function App() {
   const [productos, setProductos] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [toastMsg, setToastMsg] = useState("");
 
@@ -42,7 +43,12 @@ export default function App() {
   return (
     <Router>
       <div className="app-container">
-        <Header cartItems={cartItems} removeFromCart={removeFromCart} setSearchQuery={setSearchQuery} />
+        <Header 
+          cartItems={cartItems} 
+          removeFromCart={removeFromCart} 
+          searchQuery={searchQuery} 
+          setSearchQuery={setSearchQuery} 
+        />
         <Navbar />
         <main className="main-content">
           <Routes>

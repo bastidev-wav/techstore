@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import Cart from '../Cart/Cart';
 import './Header.css';
 
-const Header = ({ cartItems, removeFromCart, setSearchQuery }) => {
+const Header = ({ cartItems, removeFromCart, searchQuery, setSearchQuery }) => {
   return (
     <header>
       <div className="top-bar">
@@ -14,15 +14,9 @@ const Header = ({ cartItems, removeFromCart, setSearchQuery }) => {
           <div className="top-bar-item"><Headphones size={14} /> Soporte 24/7</div>
         </div>
         <div className="top-bar-right">
-          <a href="https://www.facebook.com/techstore" target="_blank" rel="noopener noreferrer">
-            <Facebook size={14} />
-          </a>
-          <a href="https://www.instagram.com/techstore" target="_blank" rel="noopener noreferrer">
-            <Instagram size={14} />
-          </a>
-          <a href="https://www.twitter.com/techstore" target="_blank" rel="noopener noreferrer">
-            <Twitter size={14} />
-          </a>
+          <a href="https://facebook.com/techstore" target="_blank" rel="noopener noreferrer"><Facebook size={14} /></a>
+          <a href="https://instagram.com/techstore" target="_blank" rel="noopener noreferrer"><Instagram size={14} /></a>
+          <a href="https://twitter.com/techstore" target="_blank" rel="noopener noreferrer"><Twitter size={14} /></a>
         </div>
       </div>
 
@@ -32,16 +26,11 @@ const Header = ({ cartItems, removeFromCart, setSearchQuery }) => {
           TechStore
         </Link>
 
-        <SearchBar setSearchQuery={setSearchQuery} />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         <div className="header-actions">
-          <button className="header-btn">
-            <User size={20} /> Iniciar Sesión
-          </button>
-          <button className="header-btn">
-            <UserPlus size={20} /> Registrarse
-          </button>
-          
+          <button className="header-btn"><User size={20} /> Iniciar Sesión</button>
+          <button className="header-btn"><UserPlus size={20} /> Registrarse</button>
           <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
         </div>
       </div>

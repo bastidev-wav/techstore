@@ -6,8 +6,8 @@ import './Home.css';
 const Home = ({ productos, addToCart, searchQuery }) => {
   
   const productosFiltrados = productos.filter(prod => 
-    prod.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    prod.categoria.toLowerCase().includes(searchQuery.toLowerCase())
+    prod?.nombre?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    prod?.categoria?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
