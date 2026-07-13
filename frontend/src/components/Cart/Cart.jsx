@@ -6,33 +6,30 @@ import './Cart.css';
 const Cart = ({ cartItems = [], removeFromCart }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const total = cartItems.reduce((acc, item) => acc + item.precio, 0);
+  const total = cartItems.reduce((acc, item) => acc + (item.precio * item.qty), 0);
+
+  const totalItemsCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   const [timeoutId, setTimeoutId] = useState(null);
 
-const openCart = () => {
+  const openCart = () => {
     if (timeoutId) clearTimeout(timeoutId);
     setIsOpen(true);
-};
+  };
 
-const closeCart = () => {
+  const closeCart = () => {
     const id = setTimeout(() => {
-        setIsOpen(false);
+      setIsOpen(false);
     }, 250);
-
     setTimeoutId(id);
-};
+  };
 
   return (
-    <div
-    className="cart-wrapper"
-    onMouseEnter={openCart}
-    onMouseLeave={closeCart}
->
+    <div className="cart-wrapper" onMouseEnter={openCart} onMouseLeave={closeCart}>
       
       <div className="cart-icon-container" onMouseEnter={() => setIsOpen(true)}>
         <ShoppingCart size={24} />
-        {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
+        {totalItemsCount > 0 && <span className="cart-badge">{totalItemsCount}</span>}
       </div>
 
       {isOpen && (
@@ -44,14 +41,16 @@ const closeCart = () => {
           ) : (
             <>
               <div className="cart-items-list">
-                {cartItems.map((item, index) => (
-                  <div key={index} className="cart-item">
+                {cartItems.map((item) => (
+                  <div key={item._id} className="cart-item">
                     <img src={item.imagen} alt={item.nombre} className="cart-item-img" />
                     <div className="cart-item-info">
                       <p className="cart-item-name">{item.nombre}</p>
-                      <p className="cart-item-price">{formatPrice(item.precio)}</p>
+                      <p className="cart-item-price">
+                        {formatPrice(item.precio)} <span className="item-qty-badge">x{item.qty}</span>
+                      </p>
                     </div>
-                    <button className="cart-item-delete" onClick={() => removeFromCart(index)}>
+                    <button className="cart-item-delete" onClick={() => removeFromCart(item._id)}>
                       <Trash2 size={18} />
                     </button>
                   </div>

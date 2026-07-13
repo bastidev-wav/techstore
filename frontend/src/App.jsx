@@ -11,8 +11,8 @@ import Admin from './pages/Admin';
 
 export default function App() {
   const [productos, setProductos] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
   
+  const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [toastMsg, setToastMsg] = useState("");
 
@@ -28,16 +28,33 @@ export default function App() {
     fetchProducts();
   }, []);
 
-  const addToCart = (producto) => {
-    setCartItems(prev => [...prev, producto]);
-    setToastMsg(`¡${producto.nombre} agregado!`);
+  const addToCart = (selectedProduct) => {
+    const isItemInCart = cartItems.find(item => item._id === selectedProduct._id);
+
+    if (isItemInCart) {
+      setCartItems(cartItems.map(item =>
+        item._id === selectedProduct._id ? { ...isItemInCart, qty: isItemInCart.qty + 1 } : item
+      ));
+    } else {
+      setCartItems([...cartItems, { ...selectedProduct, qty: 1 }]);
+    }
+
+    setToastMsg(`¡${selectedProduct.nombre} agregado!`);
     setTimeout(() => {
       setToastMsg("");
     }, 3000);
   };
 
-  const removeFromCart = (indexToRemove) => {
-    setCartItems(prev => prev.filter((_, index) => index !== indexToRemove));
+  const removeFromCart = (idToRemove) => {
+    const targetItem = cartItems.find(item => item._id === idToRemove);
+    
+    if (targetItem?.qty > 1) {
+      setCartItems(cartItems.map(item =>
+        item._id === idToRemove ? { ...targetItem, qty: targetItem.qty - 1 } : item
+      ));
+    } else {
+      setCartItems(cartItems.filter(item => item._id !== idToRemove));
+    }
   };
 
   return (
